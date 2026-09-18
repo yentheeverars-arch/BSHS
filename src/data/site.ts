@@ -72,7 +72,7 @@ export const contact = {
   whatsappHref:
     'https://wa.me/32475412863?text=' +
     encodeURIComponent('Hallo, ik heb een vraag over de dressuurveiling.'),
-  email: 'info@belgiansporthorsesales.com',
+  email: 'ech-dressage@hotmail.com',
   website: 'www.belgiansporthorsesales.com',
   websiteUrl: 'https://www.belgiansporthorsesales.com',
   address: {
