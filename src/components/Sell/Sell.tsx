@@ -75,10 +75,10 @@ export default function Sell() {
         <div className={styles.convert} data-reveal>
           <p className={styles.convertText}>{sell.convert}</p>
           <div className={styles.convertCtas}>
-            <Button href={ctaOffer.href} variant="primary">
+            <Button href={ctaOffer.href} variant="primary" external={ctaOffer.external}>
               {ctaOffer.label}
             </Button>
-            <Button href={ctaContact.href} variant="secondary">
+            <Button href={ctaContact.href} variant="secondary" external={ctaContact.external}>
               {ctaContact.label}
             </Button>
           </div>

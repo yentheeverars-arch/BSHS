@@ -72,6 +72,12 @@ export const contact = {
   whatsappHref:
     'https://wa.me/32475412863?text=' +
     encodeURIComponent('Hallo, ik heb een vraag over de dressuurveiling.'),
+  /** Vanaf de verkoopknoppen: het gesprek begint al bij het onderwerp. */
+  whatsappSellHref:
+    'https://wa.me/32475412863?text=' +
+    encodeURIComponent(
+      'Hallo, ik wil graag mijn paard aanbieden voor de dressuurveiling van 15 november.',
+    ),
   email: 'ech-dressage@hotmail.com',
   website: 'www.belgiansporthorsesales.com',
   websiteUrl: 'https://www.belgiansporthorsesales.com',
@@ -104,8 +110,28 @@ export const ctaHorse24: Cta = {
   href: auction.platformUrl,
   external: true,
 };
-export const ctaContact: Cta = { label: 'Neem contact op', href: '#contact' };
-export const ctaOffer: Cta = { label: 'Bied uw paard aan', href: '#contact' };
+/**
+ * De twee knoppen die daadwerkelijk converteren. Ze scrollen niet naar
+ * een sectie maar openen meteen een kanaal, met het onderwerp al
+ * ingevuld — WhatsApp voorop, e-mail als alternatief.
+ */
+export const ctaOffer: Cta = {
+  label: 'Aanbieden via WhatsApp',
+  href: contact.whatsappSellHref,
+  external: true,
+};
+
+export const ctaContact: Cta = {
+  label: 'Mail ons',
+  href:
+    `mailto:${contact.email}` +
+    '?subject=' +
+    encodeURIComponent('Mijn paard aanbieden voor de dressuurveiling') +
+    '&body=' +
+    encodeURIComponent(
+      'Hallo,\n\nIk wil graag mijn paard aanbieden voor de dressuurveiling van 15 november.\n\nNaam van het paard:\nAfstamming:\nLeeftijd:\nNiveau:\n\nMet vriendelijke groet,\n',
+    ),
+};
 
 /* ---------- 01 · Introductie ---------- */
 
@@ -215,11 +241,8 @@ export const finalCta = {
     'Heeft u een dressuurpaard dat een internationaal publiek verdient?',
     'Laten we de mogelijkheden bespreken.',
   ],
-  primary: ctaSell,
-  secondary: {
-    label: 'Contacteer Belgian Sport Horse Sales',
-    href: contact.phoneHref,
-  } as Cta,
+  primary: ctaOffer,
+  secondary: ctaContact,
   labels: { phone: 'Telefoon', email: 'E-mail', whatsapp: 'WhatsApp' },
 } as const;
 

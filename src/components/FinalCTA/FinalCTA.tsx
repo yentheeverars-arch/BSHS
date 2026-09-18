@@ -53,10 +53,18 @@ export default function FinalCTA() {
           </div>
 
           <div className={styles.ctas} data-reveal style={{ ['--reveal-delay' as string]: '400ms' }}>
-            <Button href={finalCta.primary.href} variant="primary">
+            <Button
+              href={finalCta.primary.href}
+              variant="primary"
+              external={finalCta.primary.external}
+            >
               {finalCta.primary.label}
             </Button>
-            <Button href={finalCta.secondary.href} variant="secondary">
+            <Button
+              href={finalCta.secondary.href}
+              variant="secondary"
+              external={finalCta.secondary.external}
+            >
               {finalCta.secondary.label}
             </Button>
           </div>
