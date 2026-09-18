@@ -1,0 +1,54 @@
+/* The tricolour reduced to a component. Three segments — ink, amber,
+   red — used at a handful of fixed roles across the page: the top
+   edge of a plate, a rail beside a figure, a rule under a heading.
+   Always the same order, always the same proportions. */
+
+.stripe {
+  display: flex;
+  flex: none;
+  overflow: hidden;
+}
+
+.stripe span {
+  display: block;
+  flex: 1;
+  transition: flex-grow 700ms var(--ease-out);
+}
+
+/* Horizontal (default) */
+.h { width: 100%; height: var(--w, 3px); }
+
+/* Vertical. Height comes from the parent stretching it — an explicit
+   100% would resolve against an auto-height parent and collapse. */
+.v {
+  flex-direction: column;
+  width: var(--w, 3px);
+  align-self: stretch;
+  min-height: 2rem;
+}
+
+.stripe span:nth-child(1) { background: var(--stripe-1, currentColor); }
+.stripe span:nth-child(2) { background: var(--amber); }
+.stripe span:nth-child(3) { background: var(--red); }
+
+/* Draws itself in when the parent section reveals */
+.draw {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1s var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.v.draw {
+  transform: scaleY(0);
+  transform-origin: top center;
+}
+
+:global(.is-in) .draw { transform: none; }
+
+/* The red segment takes over on hover — used on the feature rows */
+.stripe.react span:nth-child(3) { flex-grow: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .draw { transform: none; }
+}

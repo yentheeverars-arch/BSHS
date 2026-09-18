@@ -1,0 +1,157 @@
+/* Sticky navigation. Transparent over the hero, then a solid bar with
+   a hairline. Links are mono; the section you are in is marked with a
+   red square rather than an underline. */
+
+.nav {
+  position: fixed;
+  inset: 2px 0 auto 0;
+  z-index: 70;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color 500ms var(--ease-soft),
+    backdrop-filter 500ms var(--ease-soft),
+    border-color 500ms var(--ease-soft);
+}
+
+.scrolled {
+  background-color: rgba(11, 11, 10, 0.86);
+  backdrop-filter: saturate(150%) blur(16px);
+  border-bottom-color: var(--line);
+}
+
+.inner {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+}
+
+.brand { flex: none; display: block; }
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.1rem, 2.1vw, 2.2rem);
+}
+
+.link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding-block: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: var(--track-mono);
+  text-transform: uppercase;
+  color: var(--fg-faint);
+  transition: color var(--dur-fast) var(--ease-soft);
+}
+
+/* Red square marker, hidden until the link is active or hovered */
+.link::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  background: var(--red);
+  transform: rotate(45deg) scale(0);
+  transition: transform 380ms var(--ease-out);
+}
+
+.link:hover,
+.link:focus-visible { color: var(--fg); }
+
+.link:hover::before,
+.link:focus-visible::before { transform: rotate(45deg) scale(1); }
+
+.active { color: var(--fg); }
+.active::before { transform: rotate(45deg) scale(1); }
+
+.actions { display: flex; align-items: center; }
+
+/* ---------- Mobile ---------- */
+
+.toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  margin-right: -10px;
+  place-items: center;
+}
+
+.bars { width: 24px; height: 8px; position: relative; }
+
+.bars span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: var(--fg);
+  transition: transform 400ms var(--ease-out);
+}
+
+.bars span:first-child { top: 0; }
+.bars span:last-child { bottom: 0; }
+
+.open .bars span:first-child { transform: translateY(3.25px) rotate(45deg); }
+.open .bars span:last-child { transform: translateY(-3.25px) rotate(-45deg); }
+
+.sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 65;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--nav-h) var(--gutter) 5rem;
+  background: var(--ink);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 420ms var(--ease-out), visibility 420ms;
+}
+
+.sheetOpen { opacity: 1; visibility: visible; }
+
+.sheetLink {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding-block: 0.55em;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: 'wdth' 104;
+  font-size: clamp(1.9rem, 8.5vw, 2.9rem);
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.sheetLink:last-of-type { border-bottom: 0; }
+
+.sheetIndex {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.1em;
+  color: var(--red);
+}
+
+.sheetMeta {
+  margin-top: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  color: var(--fg-faint);
+}
+
+@media (max-width: 1080px) {
+  .links, .actions { display: none; }
+  .toggle { display: grid; }
+}

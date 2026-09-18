@@ -1,0 +1,18 @@
+/* Hairline reading-progress bar pinned above the navigation. */
+
+.bar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 80;
+  height: 2px;
+  background: transparent;
+  pointer-events: none;
+}
+
+.fill {
+  height: 100%;
+  width: 100%;
+  transform: scaleX(var(--p, 0));
+  transform-origin: left center;
+  background: linear-gradient(to right, var(--ink) 0%, var(--amber) 55%, var(--red) 100%);
+}

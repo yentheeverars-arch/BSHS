@@ -1,0 +1,102 @@
+/* Minimal footer. The tricolour runs the full width at the very
+   bottom of the page, closing it the way the hero opens it. */
+
+.footer { position: relative; border-top: 1px solid var(--line); }
+
+.grid {
+  padding-block: clamp(3rem, 6vw, 4.5rem);
+  align-items: start;
+}
+
+.brandCol { grid-column: 1 / span 5; }
+.navCol { grid-column: 7 / span 2; }
+.legalCol { grid-column: 10 / span 3; }
+
+.tagline {
+  margin-top: 1.6rem;
+  max-width: 28ch;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+  line-height: 1.4;
+  color: var(--fg-dim);
+}
+
+.colTitle { color: var(--fg-faint); margin-bottom: 1.4rem; }
+
+.links { display: grid; gap: 0.8rem; }
+
+.link {
+  position: relative;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: var(--track-mono);
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  transition: color 320ms var(--ease-soft);
+}
+
+.link::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  background: var(--red);
+  transform: rotate(45deg) scale(0);
+  transition: transform 340ms var(--ease-out);
+}
+
+.link:hover { color: var(--fg); }
+.link:hover::before { transform: rotate(45deg) scale(1); }
+
+.legal {
+  font-style: normal;
+  font-size: var(--t-small);
+  line-height: 1.85;
+  color: var(--fg-faint);
+}
+
+.legal strong {
+  display: block;
+  font-weight: 500;
+  color: var(--fg-dim);
+  margin-bottom: 0.35rem;
+}
+
+.legalSplit {
+  margin-top: 1.3rem;
+  padding-top: 1.3rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.72rem;
+}
+
+.bar {
+  border-top: 1px solid var(--line);
+  padding-block: 1.5rem 1.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  color: var(--fg-faint);
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 320ms var(--ease-soft);
+}
+
+.top:hover { color: var(--red); }
+.top svg { width: 11px; height: 11px; }
+
+.footStripe { width: 100%; }
+
+@media (max-width: 900px) {
+  .brandCol, .navCol, .legalCol { grid-column: 1 / span 6; }
+  .navCol, .legalCol { margin-top: 2.5rem; }
+}

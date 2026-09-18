@@ -1,0 +1,189 @@
+/* Split-cell buttons: a label cell and a square action cell divided
+   by a hairline. On hover the whole cell fills, the arrow leaves
+   top-right and a second one follows it in from bottom-left, and the
+   label swaps for a copy of itself. No rounding, no gradients. */
+
+.btn {
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: stretch;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--fg);
+  isolation: isolate;
+  transition:
+    background-color var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out),
+    color var(--dur) var(--ease-out),
+    transform 480ms var(--ease-out);
+}
+
+.label {
+  display: grid;
+  overflow: hidden;
+  padding: 1.05rem 1.6rem;
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  font-weight: 400;
+  letter-spacing: var(--track-mono);
+  text-transform: uppercase;
+  line-height: 1.25;
+  text-align: left;
+}
+
+/* Two stacked copies of the label; the pair slides on hover. */
+.label > span {
+  grid-area: 1 / 1;
+  transition: transform 560ms var(--ease-out), opacity 300ms linear;
+}
+
+.label > span:last-child {
+  transform: translate3d(0, 110%, 0);
+  opacity: 0;
+}
+
+.btn:hover .label > span:first-child,
+.btn:focus-visible .label > span:first-child {
+  transform: translate3d(0, -110%, 0);
+  opacity: 0;
+}
+
+.btn:hover .label > span:last-child,
+.btn:focus-visible .label > span:last-child {
+  transform: none;
+  opacity: 1;
+}
+
+/* Action cell */
+.action {
+  position: relative;
+  width: 3.4rem;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-left: 1px solid var(--line-strong);
+  transition: border-color var(--dur) var(--ease-out), background-color var(--dur) var(--ease-out);
+}
+
+.action svg {
+  grid-area: 1 / 1;
+  width: 13px;
+  height: 13px;
+  transition: transform 520ms var(--ease-out);
+}
+
+/* Second arrow waits below-left, then takes the first one's place.
+   Offsets are absolute, not percentages of the 13px glyph, so both
+   arrows clear the cell and stay clipped. */
+.action svg:last-child { transform: translate3d(-2.6rem, 2.6rem, 0); }
+
+.btn:hover .action svg:first-child,
+.btn:focus-visible .action svg:first-child {
+  transform: translate3d(2.6rem, -2.6rem, 0);
+}
+
+.btn:hover .action svg:last-child,
+.btn:focus-visible .action svg:last-child {
+  transform: none;
+}
+
+/* ---------- Variants ---------- */
+
+/* Primary — the only filled element on its surface. */
+.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-fg);
+}
+
+.primary .action {
+  border-left-color: rgba(255, 255, 255, 0.28);
+  background: rgba(0, 0, 0, 0.14);
+}
+
+.primary:hover,
+.primary:focus-visible {
+  background: var(--invert-bg);
+  border-color: var(--invert-bg);
+  color: var(--invert-fg);
+}
+
+.primary:hover .action,
+.primary:focus-visible .action {
+  border-left-color: rgba(128, 128, 128, 0.3);
+  background: transparent;
+}
+
+/* Gold — outlined in champagne, used in the hero beside the red. */
+.gold {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.gold .action { border-left-color: rgba(201, 169, 97, 0.4); }
+
+.gold::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 560ms var(--ease-out);
+}
+
+.gold:hover,
+.gold:focus-visible { color: var(--ink); }
+
+.gold:hover::after,
+.gold:focus-visible::after { transform: none; }
+
+/* Flush — no rule between the label and the action cell. Used where
+   the button runs the full width and the divider would read as a seam. */
+.flush .action { border-left: 0; background: transparent; }
+
+/* Secondary — outline that fills with the surface's inverse. */
+.secondary:hover,
+.secondary:focus-visible {
+  background: var(--invert-bg);
+  border-color: var(--invert-bg);
+  color: var(--invert-fg);
+}
+
+.secondary:hover .action,
+.secondary:focus-visible .action {
+  border-left-color: rgba(128, 128, 128, 0.3);
+}
+
+/* Ghost — a ruled text link, no box. */
+.ghost {
+  border: 0;
+  border-bottom: 1px solid var(--line-strong);
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.ghost .label { padding: 0.75rem 0 0.7rem; }
+
+.ghost .action {
+  width: 2.1rem;
+  border-left: 0;
+  justify-items: end;
+}
+
+.ghost:hover,
+.ghost:focus-visible {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+@media (max-width: 560px) {
+  .btn { width: 100%; }
+  .label { padding-inline: 1.25rem; }
+  .ghost { width: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn { transform: none !important; }
+}

@@ -1,0 +1,131 @@
+/* The primary conversion section. Black, and deliberately without a
+   photograph: the contrast against the paper sections above is what
+   makes it read as the decision point of the page. */
+
+.section { position: relative; overflow: hidden; }
+
+.glow {
+  position: absolute;
+  top: 28%;
+  left: -14%;
+  width: min(72vw, 900px);
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(200, 16, 46, 0.13), rgba(240, 179, 35, 0.04) 44%, transparent 66%);
+  pointer-events: none;
+}
+
+.shellInner { position: relative; z-index: 1; }
+
+.head { align-items: end; margin-bottom: clamp(3rem, 6vw, 5rem); }
+
+.headLeft { grid-column: 1 / span 7; min-width: 0; }
+.headRight { grid-column: 9 / span 4; }
+
+.headline {
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  font-size: var(--t-h1);
+  line-height: 0.92;
+}
+
+.headline .em { color: var(--red); }
+
+.subtitle {
+  margin-top: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.25rem, 2.1vw, 1.85rem);
+  line-height: 1.28;
+  color: var(--fg-dim);
+  max-width: 26ch;
+  text-transform: none;
+}
+
+.body { display: grid; gap: 1.2rem; }
+
+/* ---------- Steps ---------- */
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1.25rem, 2.2vw, 2.25rem);
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  padding-top: clamp(1.25rem, 2vw, 1.75rem);
+}
+
+.stepBar {
+  position: absolute;
+  inset: 0 0 auto 0;
+}
+
+.stepWrap { position: relative; }
+
+.stepTitle {
+  font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+  line-height: 1.1;
+  margin-bottom: 0.85rem;
+  transition: color 420ms var(--ease-soft);
+}
+
+.stepWrap:hover .stepTitle { color: var(--red); }
+
+.stepBody {
+  font-size: var(--t-small);
+  line-height: 1.75;
+  color: var(--fg-dim);
+}
+
+/* ---------- Conversion block ---------- */
+/* The one solid red plane on the page. */
+
+.convert {
+  position: relative;
+  margin-top: clamp(3.5rem, 7vw, 5.5rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  padding: clamp(2rem, 4vw, 3.25rem);
+  background: var(--red);
+  color: var(--paper);
+  overflow: hidden;
+  /* Inside the red plane the surface flips again, so the buttons and
+     the tricolour keep working without special-casing. */
+  --fg: var(--paper);
+  --fg-dim: rgba(241, 237, 227, 0.78);
+  --line: rgba(241, 237, 227, 0.26);
+  --line-strong: rgba(241, 237, 227, 0.55);
+  --invert-bg: var(--ink);
+  --invert-fg: var(--paper);
+  --accent: var(--paper);
+  --accent-fg: var(--ink);
+  --stripe-1: var(--paper);
+}
+
+.convertText {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: 'wdth' var(--wdth-display);
+  font-size: clamp(1.5rem, 2.8vw, 2.5rem);
+  line-height: 1;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  max-width: 19ch;
+}
+
+.convertCtas { display: flex; gap: 0.85rem; flex-wrap: wrap; }
+
+@media (max-width: 900px) {
+  .headLeft, .headRight { grid-column: 1 / span 6; }
+  .headRight { margin-top: 1.5rem; }
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem 1.5rem; }
+}
+
+@media (max-width: 600px) {
+  .steps { grid-template-columns: 1fr; }
+  .convert { grid-template-columns: 1fr; }
+  .convertCtas { width: 100%; flex-direction: column; align-items: stretch; }
+}

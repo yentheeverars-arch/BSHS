@@ -1,0 +1,84 @@
+/* Opening statement on paper. No photograph: the claim and the single
+   figure carry the section on their own. */
+
+.section { position: relative; overflow: hidden; }
+
+.head { margin-bottom: clamp(2.5rem, 6vw, 4.5rem); }
+
+.grid { align-items: start; }
+
+.text { grid-column: 1 / span 7; min-width: 0; }
+
+.aside {
+  grid-column: 9 / span 4;
+  display: grid;
+  gap: 1.25rem;
+  padding-top: 0.6rem;
+}
+
+.headline {
+  font-size: var(--t-h1);
+  line-height: 0.94;
+}
+
+.headline .em { color: var(--red); }
+
+/* ---------- The figure ---------- */
+
+.stat {
+  margin-top: clamp(3.5rem, 8vw, 6rem);
+  padding-top: clamp(2rem, 4vw, 3rem);
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: stretch;
+  gap: clamp(1.25rem, 2.5vw, 2.25rem);
+}
+
+.statRail { align-self: stretch; }
+
+.statMain {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem clamp(1.5rem, 4vw, 3.5rem);
+}
+
+.statValue {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: 'wdth' var(--wdth-display);
+  font-size: clamp(4rem, 11vw, 9.5rem);
+  line-height: 0.8;
+  letter-spacing: -0.055em;
+  font-variant-numeric: tabular-nums;
+}
+
+.statValue sup {
+  font-size: 0.4em;
+  vertical-align: super;
+  line-height: 1;
+  color: var(--red);
+  margin-left: 0.05em;
+}
+
+.statMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding-bottom: 0.5rem;
+}
+
+.statLabel { color: var(--fg); }
+
+.statCaption {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.1rem, 1.7vw, 1.45rem);
+  color: var(--fg-dim);
+}
+
+@media (max-width: 900px) {
+  .text, .aside { grid-column: 1 / span 6; }
+  .aside { padding-top: 0; margin-top: 0.5rem; }
+  .stat { margin-top: 2.75rem; }
+}

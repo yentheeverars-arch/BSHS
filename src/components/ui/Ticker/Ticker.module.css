@@ -1,0 +1,69 @@
+/* Marquee strip. Reads as the running header of a catalogue, and
+   carries the Belgian tricolour as three hairlines beneath it. */
+
+.ticker {
+  position: relative;
+  overflow: hidden;
+  border-block: 1px solid var(--line);
+  background: var(--bg);
+  padding-block: 0.95rem;
+  user-select: none;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation: slide var(--speed, 46s) linear infinite;
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  flex: none;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 3vw, 2.75rem);
+  padding-right: clamp(1.5rem, 3vw, 2.75rem);
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: var(--track-mono);
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  white-space: nowrap;
+}
+
+/* Small rotated square between items, in the flame red */
+.item::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  flex: none;
+  background: var(--accent);
+  transform: rotate(45deg);
+}
+
+@keyframes slide {
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+.ticker:hover .track { animation-play-state: paused; }
+
+/* Tricolour hairlines pinned under the strip */
+.stripe {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 2px;
+  display: flex;
+}
+
+.stripe span { flex: 1; }
+.stripe span:nth-child(1) { background: var(--stripe-1); }
+.stripe span:nth-child(2) { background: var(--amber); }
+.stripe span:nth-child(3) { background: var(--red); }
+
+@media (prefers-reduced-motion: reduce) {
+  .track { animation: none; }
+}

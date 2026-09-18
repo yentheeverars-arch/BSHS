@@ -1,0 +1,10 @@
+/* Official HORSE24 artwork, in two prepared variants: the supplied
+   white wordmark for black surfaces and an ink recolour for paper
+   ones. The orange "24" is kept in both. */
+
+.logo { display: inline-block; line-height: 0; }
+
+.logo img {
+  height: var(--h24-h, 34px);
+  width: auto;
+}

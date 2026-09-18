@@ -1,0 +1,13 @@
+/* The official lockup, in two prepared variants: the artwork as
+   supplied for paper surfaces, and a bone recolour for black ones.
+   Both are trimmed and transparent. See README. */
+
+.logo {
+  display: inline-block;
+  line-height: 0;
+}
+
+.logo img {
+  height: var(--logo-h, 34px);
+  width: auto;
+}

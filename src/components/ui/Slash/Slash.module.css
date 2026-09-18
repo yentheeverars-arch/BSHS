@@ -1,0 +1,34 @@
+/* The transition between a black section and a paper one: the page
+   cuts on an angle and the tricolour runs along the seam. This is the
+   page's signature move — it appears at every surface change. */
+
+.slash {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: clamp(58px, 8vw, 132px);
+  line-height: 0;
+  overflow: hidden;
+}
+
+.slash svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* The three seam lines sweep in from the left on reveal */
+.seam {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1.5s var(--ease-out);
+}
+
+.seam:nth-of-type(2) { transition-delay: 90ms; }
+.seam:nth-of-type(3) { transition-delay: 180ms; }
+
+:global(.is-in) .seam { stroke-dashoffset: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .seam { stroke-dashoffset: 0; transition: none; }
+}

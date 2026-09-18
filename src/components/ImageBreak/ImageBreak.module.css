@@ -1,0 +1,66 @@
+/* A full-width statement, set in type alone. There is no photograph
+   here: an empty plate read as a hole in the page, and the sentence
+   carries the section on its own. */
+
+.break {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  padding-block: clamp(5rem, 16vh, 10rem);
+}
+
+.glow {
+  position: absolute;
+  inset: auto -10% -40% -10%;
+  height: 120%;
+  background: radial-gradient(60% 70% at 30% 80%, rgba(200, 16, 46, 0.12), transparent 70%);
+  pointer-events: none;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.statement {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: 'wdth' var(--wdth-display);
+  font-size: var(--t-display);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  max-width: min(100%, 920px);
+}
+
+.small {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 0.26em;
+  letter-spacing: var(--track-mono);
+  color: var(--red);
+  vertical-align: middle;
+  padding-bottom: 0.4em;
+}
+
+.last { color: transparent; -webkit-text-stroke: 1.5px var(--paper); }
+
+.foot {
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  color: var(--fg-faint);
+}
+
+.footStripe { width: clamp(80px, 12vw, 180px); }

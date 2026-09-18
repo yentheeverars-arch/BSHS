@@ -1,0 +1,94 @@
+/* Four commitments set as catalogue rows rather than cards. Each row
+   is a full-width band on the 12-column grid; the tricolour sweeps
+   across its top edge on hover. */
+
+.section { position: relative; }
+
+.head {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--col-gap);
+  align-items: end;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.headLeft { grid-column: 1 / span 7; }
+
+.title {
+  margin-top: 1.5rem;
+  font-size: var(--t-h2);
+  line-height: 0.94;
+}
+
+.headNote {
+  grid-column: 9 / span 4;
+  align-self: end;
+  font-size: var(--t-small);
+  line-height: 1.75;
+  color: var(--fg-dim);
+}
+
+.rows { border-top: 1px solid var(--line); }
+
+.row {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--col-gap);
+  align-items: baseline;
+  padding-block: clamp(1.75rem, 3.2vw, 2.6rem);
+  border-bottom: 1px solid var(--line);
+  transition: background-color 600ms var(--ease-soft), padding-left 600ms var(--ease-out);
+}
+
+/* Tricolour sweep along the row's top edge */
+.sweep {
+  position: absolute;
+  inset: -1px 0 auto 0;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 750ms var(--ease-out);
+}
+
+.row:hover { background-color: var(--bg-raised); padding-left: 1.25rem; }
+.row:hover .sweep { transform: scaleX(1); }
+
+.rowTitle {
+  grid-column: 1 / span 4;
+  font-size: var(--t-h3);
+  line-height: 1.06;
+  transition: color 400ms var(--ease-soft);
+}
+
+.row:hover .rowTitle { color: var(--red); }
+
+.rowBody {
+  grid-column: 6 / span 6;
+  font-size: var(--t-small);
+  line-height: 1.75;
+  color: var(--fg-dim);
+  max-width: 46ch;
+}
+
+.icon {
+  grid-column: 12 / span 1;
+  justify-self: end;
+  align-self: center;
+  width: 30px;
+  height: 30px;
+  color: var(--fg-faint);
+  transition: color 500ms var(--ease-soft), transform 600ms var(--ease-out);
+}
+
+.row:hover .icon { color: var(--red); transform: translateX(6px); }
+
+@media (max-width: 900px) {
+  .headLeft, .headNote { grid-column: 1 / span 6; }
+  .headNote { margin-top: 1.25rem; }
+
+  .row { grid-template-columns: repeat(6, minmax(0, 1fr)); row-gap: 0.85rem; }
+  .rowTitle { grid-column: 1 / span 5; }
+  .rowBody { grid-column: 1 / span 6; }
+  .icon { display: none; }
+  .row:hover { padding-left: 0; }
+}
