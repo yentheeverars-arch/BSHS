@@ -1,5 +1,6 @@
 import Button from '../ui/Button';
 import Stripe from '../ui/Stripe';
+import WhatsAppMark from '../ui/WhatsAppMark';
 import useReveal from '../../hooks/useReveal';
 import { contact, finalCta } from '../../data/site';
 import styles from './FinalCTA.module.css';
@@ -7,9 +8,17 @@ import styles from './FinalCTA.module.css';
 export default function FinalCTA() {
   const ref = useReveal<HTMLElement>({ threshold: 0.1 });
 
-  // No website row — the visitor is already on it.
+  // Stacked, with WhatsApp directly under the number it dials — they
+  // are the same line. No website row: the visitor is already on it.
   const details = [
     { label: finalCta.labels.phone, value: contact.phone, href: contact.phoneHref },
+    {
+      label: finalCta.labels.whatsapp,
+      value: contact.whatsapp,
+      href: contact.whatsappHref,
+      external: true,
+      icon: true,
+    },
     { label: finalCta.labels.email, value: contact.email, href: `mailto:${contact.email}` },
   ];
 
@@ -60,8 +69,16 @@ export default function FinalCTA() {
                 href={detail.href}
                 data-reveal
                 style={{ ['--reveal-delay' as string]: `${i * 110}ms` }}
+                {...('external' in detail && detail.external
+                  ? { target: '_blank', rel: 'noopener noreferrer' }
+                  : null)}
               >
-                <span className={`mono ${styles.detailLabel}`}>{detail.label}</span>
+                <span className={`mono ${styles.detailLabel}`}>
+                  {'icon' in detail && detail.icon ? (
+                    <WhatsAppMark className={styles.detailIcon} />
+                  ) : null}
+                  {detail.label}
+                </span>
                 <span className={styles.detailValue}>{detail.value}</span>
               </a>
             ))}

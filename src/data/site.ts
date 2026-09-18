@@ -64,6 +64,14 @@ export const auction = {
 export const contact = {
   phone: '+32 475 41 28 63',
   phoneHref: 'tel:+32475412863',
+  /**
+   * WhatsApp wants the number in international form, zonder + of
+   * spaties. `text` vult het bericht alvast in voor de bezoeker.
+   */
+  whatsapp: '+32 475 41 28 63',
+  whatsappHref:
+    'https://wa.me/32475412863?text=' +
+    encodeURIComponent('Hallo, ik heb een vraag over de dressuurveiling.'),
   email: 'info@belgiansporthorsesales.com',
   website: 'www.belgiansporthorsesales.com',
   websiteUrl: 'https://www.belgiansporthorsesales.com',
@@ -212,7 +220,7 @@ export const finalCta = {
     label: 'Contacteer Belgian Sport Horse Sales',
     href: contact.phoneHref,
   } as Cta,
-  labels: { phone: 'Telefoon', email: 'E-mail' },
+  labels: { phone: 'Telefoon', email: 'E-mail', whatsapp: 'WhatsApp' },
 } as const;
 
 /* ---------- Voettekst ---------- */

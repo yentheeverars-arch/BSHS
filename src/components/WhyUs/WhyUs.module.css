@@ -83,7 +83,9 @@
 .row:hover .icon { color: var(--red); transform: translateX(6px); }
 
 @media (max-width: 900px) {
-  .headLeft, .headNote { grid-column: 1 / span 6; }
+  /* This header keeps its own 12-column track, so span the whole of
+     it rather than the 6 the page grid would have had here. */
+  .headLeft, .headNote { grid-column: 1 / -1; }
   .headNote { margin-top: 1.25rem; }
 
   .row { grid-template-columns: repeat(6, minmax(0, 1fr)); row-gap: 0.85rem; }
